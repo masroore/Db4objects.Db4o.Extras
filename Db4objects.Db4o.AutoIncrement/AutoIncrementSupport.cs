@@ -48,6 +48,10 @@ namespace Db4objects.Db4o.AutoIncrement {
 		}
 
 		private static MemberInfo FindAutoIdAccessor(Type theType) {
+
+            if (theType == typeof(object))
+				return null;
+
 			var fields = theType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 			var properties = theType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 			var accessMembers = fields.Cast<MemberInfo>().Concat(properties);
